@@ -7,12 +7,16 @@
 //
 
 #import "LHTreeNode.h"
+@interface LHTreeNode ()
+
+@end
 
 @implementation LHTreeNode
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.childrenNodes = [NSMutableArray array];
+        
     }
     return self;
 }
@@ -38,5 +42,13 @@
 
 - (void)addNode:(LHTreeNode *)node {
     [self.childrenNodes addObject:node];
+}
+
+- (void)settingAboutnumbersOfLayers:(NSInteger)count {
+    _numbersOfLayers = count;
+}
+
+- (void)calculateLayout {
+    self.layout = [[LHLayout alloc] initWithNode:self];;
 }
 @end

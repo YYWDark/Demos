@@ -14,9 +14,12 @@
 @property (nonatomic, copy) NSString *parentIdNumber;
 @property (nonatomic, copy) NSString *title;
 
+
 @property (nonatomic, strong) LHLayout *layout;
 @property (nonatomic, strong) NSMutableArray <LHTreeNode *>*childrenNodes;
 @property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign, readonly) NSUInteger numbersOfLayers;
+
 
 + (instancetype)nodeWithTitle:(NSString *)title
                    isSelected:(BOOL)isSelected
@@ -28,4 +31,6 @@
                parentIdNumber:(NSString *)parentIdNumber;
 
 - (void)addNode:(LHTreeNode *)node;
+- (void)settingAboutnumbersOfLayers:(NSInteger)count;
+- (void)calculateLayout;
 @end

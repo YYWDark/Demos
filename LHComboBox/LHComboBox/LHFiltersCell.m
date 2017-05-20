@@ -7,6 +7,7 @@
 //
 
 #import "LHFiltersCell.h"
+#import "LHFoldView.h"
 
 @implementation LHFiltersCell
 

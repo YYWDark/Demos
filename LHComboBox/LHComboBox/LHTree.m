@@ -32,6 +32,7 @@
     NSMutableArray *queue = [NSMutableArray arrayWithCapacity:mutableArray.count];
     [queue addObject:self.rootNode];
     
+    //构建树结构
     while (queue.count > 0) {
         LHTreeNode *firstNode = [queue firstObject];
         NSMutableArray *temArray = [NSMutableArray array]; //储存将要删除额index
@@ -49,22 +50,38 @@
             [mutableArray removeObjectAtIndex:[number integerValue]];
         }
         
-        if ([firstNode.idNumber integerValue] == 0 && mutableArray.count != 0) {//当移除掉根节点，这个时候根节点的子节点都从原数组移除点了，如果原数组还有数据证明这个树的层树不止两层
-            self.numbersOfTreeLayers = LHNumbersOfTreeLayersMutl;
-        }
-        
+        [self calculateEachNodeLayout:firstNode];
         [queue removeObjectAtIndex:0];
     }
+    
+    [self calculateNumbersLayersOfTreeFirstNode];
     
     if (mutableArray.count != 0) {
         NSLog(@"构建树的出现了问题 有的节点没有找到父节点");
     }
-    
 }
 
-- (void)calculateEachNodeLayout {
+//判断第一层的子树的深度
+- (void)calculateNumbersLayersOfTreeFirstNode {
+    for (LHTreeNode *firstNode in self.rootNode.childrenNodes) {
+        LHTreeNode *currentNode = firstNode;
+        NSUInteger numbersOflayers = 0;
+        while (currentNode.childrenNodes.count) {
+            currentNode = [currentNode.childrenNodes firstObject];
+            numbersOflayers ++;
+        }
+        [firstNode settingAboutnumbersOfLayers:numbersOflayers];
+        NSLog(@"当前子视图的深度：%ld 节点名称:%@",firstNode.numbersOfLayers,firstNode.title);
+    }
+}
+
+
+- (void)calculateEachNodeLayout:(LHTreeNode *)node {
+    //单层的UI不需要用到layout类了
     if (self.displayType == LHPopupViewDisplayTypeNormal) return;
-    
+    if (node == self.rootNode) return;
+    if (node.childrenNodes.count == 0) return;
+    [node calculateLayout];
 }
 
 - (LHTreeNode *)rootNode {

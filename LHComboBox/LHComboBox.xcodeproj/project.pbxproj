@@ -30,6 +30,7 @@
 		75144E911ECED7F7002BFD56 /* LHFiltersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E901ECED7F6002BFD56 /* LHFiltersCell.m */; };
 		75144E941ECEDA88002BFD56 /* LHFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E931ECEDA88002BFD56 /* LHFoldView.m */; };
 		75144E991ECEE488002BFD56 /* LHLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E981ECEE488002BFD56 /* LHLayout.m */; };
+		75144E9C1ED0080D002BFD56 /* NSObject+Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		75144E931ECEDA88002BFD56 /* LHFoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHFoldView.m; sourceTree = "<group>"; };
 		75144E971ECEE488002BFD56 /* LHLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHLayout.h; sourceTree = "<group>"; };
 		75144E981ECEE488002BFD56 /* LHLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHLayout.m; sourceTree = "<group>"; };
+		75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Calculate.h"; sourceTree = "<group>"; };
+		75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Calculate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 				75144E851ECEC90E002BFD56 /* PopView */,
 				75144E811ECEC887002BFD56 /* pulldown.png */,
 				75144E821ECEC887002BFD56 /* pullup.png */,
+				75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */,
+				75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */,
 				75144E7A1ECEC123002BFD56 /* UIColor+ComboBoxExtension.h */,
 				75144E7B1ECEC123002BFD56 /* UIColor+ComboBoxExtension.m */,
 				75144E7C1ECEC123002BFD56 /* UIView+ComboBoxExtension.h */,
@@ -374,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75144E9C1ED0080D002BFD56 /* NSObject+Calculate.m in Sources */,
 				75144E7F1ECEC123002BFD56 /* UIView+ComboBoxExtension.m in Sources */,
 				75144E991ECEE488002BFD56 /* LHLayout.m in Sources */,
 				75144E881ECEC93D002BFD56 /* LHPopupView.m in Sources */,
@@ -626,6 +632,7 @@
 				75144E5C1ECE7CCE002BFD56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75144E5D1ECE7CCE002BFD56 /* Build configuration list for PBXNativeTarget "LHComboBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -634,6 +641,7 @@
 				75144E5F1ECE7CCE002BFD56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75144E601ECE7CCE002BFD56 /* Build configuration list for PBXNativeTarget "LHComboBoxUITests" */ = {
 			isa = XCConfigurationList;
@@ -642,6 +650,7 @@
 				75144E621ECE7CCE002BFD56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

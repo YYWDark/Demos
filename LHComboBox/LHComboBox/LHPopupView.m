@@ -7,7 +7,7 @@
 //
 
 #import "LHPopupView.h"
-
+#import "LHFiltersCell.h"
 @interface LHPopupView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIView *bottomView;
 @end
@@ -41,7 +41,7 @@
     self.mainTableView.rowHeight = PopupViewRowHeight;
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
-    [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MainCellID];
+    [self.mainTableView registerClass:[LHFiltersCell class] forCellReuseIdentifier:MainCellID];
     [self addSubview:self.mainTableView];
     
     //出现的动画
@@ -95,7 +95,7 @@
 }
 
 - (void)respondsToTapGestureRecognizer:(UITapGestureRecognizer *)tapGestureRecognizer {
-    [self dismiss];
+   [self dismiss];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -103,7 +103,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
+    LHFiltersCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
     LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
     cell.textLabel.text = [node title];
     return cell;

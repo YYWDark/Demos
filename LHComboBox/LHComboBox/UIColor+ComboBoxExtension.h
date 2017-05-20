@@ -17,5 +17,6 @@
  *  @return <#return value description#>
  */
 + (UIColor *)colorWithHexString:(NSString *)hexString;
+
 + (UIColor *)randomColor;
 @end

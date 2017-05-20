@@ -10,7 +10,7 @@
 #define LHComboBoxHeader_h
 #import "UIView+ComboBoxExtension.h"
 #import "UIColor+ComboBoxExtension.h"
-
+#import "NSObject+Calculate.h"
 #define scale [UIScreen mainScreen].scale
 static  NSString *titleSelectedColor = @"4EBC72";
 static const CGFloat  ButtonFontSize = 14.0f;
@@ -58,8 +58,9 @@ static const CGFloat FoldLableSize = 14.0f;
 static const CGFloat FoldButtonSize = 14.0f;
 
 static const CGFloat FoldVerticalMargin = 10.0f;
-static const CGFloat FoldToolViewHeight = 25.0f;
 static const CGFloat FoldHorizontalMargin = 10.0f;
+
+static const CGFloat FoldToolViewHeight = 25.0f;
 static const CGFloat FoldButtonHeight = 25.0f;
 #define kScreenHeigth [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
