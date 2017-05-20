@@ -31,6 +31,7 @@
 		75144E941ECEDA88002BFD56 /* LHFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E931ECEDA88002BFD56 /* LHFoldView.m */; };
 		75144E991ECEE488002BFD56 /* LHLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E981ECEE488002BFD56 /* LHLayout.m */; };
 		75144E9C1ED0080D002BFD56 /* NSObject+Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */; };
+		75144E9F1ED01C39002BFD56 /* LHSelectedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		75144E981ECEE488002BFD56 /* LHLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHLayout.m; sourceTree = "<group>"; };
 		75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Calculate.h"; sourceTree = "<group>"; };
 		75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Calculate.m"; sourceTree = "<group>"; };
+		75144E9D1ED01C39002BFD56 /* LHSelectedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHSelectedPath.h; sourceTree = "<group>"; };
+		75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHSelectedPath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 		75144E241ECE7CCD002BFD56 = {
 			isa = PBXGroup;
 			children = (
+				75144E9D1ED01C39002BFD56 /* LHSelectedPath.h */,
+				75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */,
 				75144E2F1ECE7CCD002BFD56 /* LHComboBox */,
 				75144E491ECE7CCD002BFD56 /* LHComboBoxTests */,
 				75144E541ECE7CCE002BFD56 /* LHComboBoxUITests */,
@@ -380,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75144E9C1ED0080D002BFD56 /* NSObject+Calculate.m in Sources */,
+				75144E9F1ED01C39002BFD56 /* LHSelectedPath.m in Sources */,
 				75144E7F1ECEC123002BFD56 /* UIView+ComboBoxExtension.m in Sources */,
 				75144E991ECEE488002BFD56 /* LHLayout.m in Sources */,
 				75144E881ECEC93D002BFD56 /* LHPopupView.m in Sources */,

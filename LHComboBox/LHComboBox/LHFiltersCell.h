@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LHTreeNode.h"
 
 @interface LHFiltersCell : UITableViewCell
-
+@property (nonatomic, strong) LHTreeNode *node;
 @end

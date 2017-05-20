@@ -17,6 +17,7 @@
         self.buttonPositionX = [NSMutableArray array];
         self.buttonPositionY = [NSMutableArray array];
         self.buttonWidthArray = [NSMutableArray array];
+        self.node = node;
         [self layoutWithNode:node];
     }
     return self;

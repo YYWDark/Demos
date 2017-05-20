@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LHTreeNode.h"
 @interface LHFoldView : UIView
-
+@property (nonatomic, strong) LHLayout *layout;
 @end

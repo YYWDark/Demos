@@ -17,6 +17,7 @@
 - (id)initWithTree:(LHTree *)tree {
     self = [self init];
     if (self) {
+      
     }
     return self;
 }
@@ -24,7 +25,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-
+         self.selectedArray = [NSMutableArray array];
     }
     return self;
 }

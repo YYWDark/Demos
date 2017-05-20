@@ -8,15 +8,17 @@
 
 #import "LHPopupView.h"
 #import "LHFiltersCell.h"
+#import "LHSelectedPath.h"
 @interface LHPopupView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIView *bottomView;
+
 @end
 
 @implementation LHPopupView
 - (instancetype)init {
     self = [super init];
     if (self) {
-    
+       
     }
     return self;
 }
@@ -25,8 +27,48 @@
     self = [self init];
     if (self) {
         self.tree = tree;
+        [self _findSelectedItem];
     }
     return self;
+}
+
+- (void)_findSelectedItem {
+    [self.tree.rootNode.childrenNodes enumerateObjectsUsingBlock:^(LHTreeNode * _Nonnull firstNode, NSUInteger firstIndex, BOOL * _Nonnull stop) {
+        [self.selectedArray addObject:[NSMutableArray array]];
+        
+        for (int secondIndex = 0; secondIndex < firstNode.childrenNodes.count; secondIndex ++) {
+            LHTreeNode *secondNode = firstNode.childrenNodes[secondIndex];
+            switch (firstNode.numbersOfLayers) {
+                    case 1:{//二级的为多选
+                        if (secondNode.isSelected == YES) {
+                           LHSelectedPath *path = [LHSelectedPath pathWithFirstPath:firstIndex secondPath:secondIndex];
+                           NSMutableArray *array = [self.selectedArray lastObject];
+                           [array addObject:path];
+                        }
+                        firstNode.firstOpenStatus = LHTreeNodeFirstClose;
+                        
+                        break;}
+                    case 2:{//二级的为单选，因为还有三级
+                        firstNode.firstOpenStatus = LHTreeNodeFirstClose;
+                        if (secondNode.isSelected == YES) {
+                            for (int thirdIndex = 0; thirdIndex > 0; thirdIndex++) {
+                                LHTreeNode *thirdNode = firstNode.childrenNodes[thirdIndex];
+                                if (thirdNode.isSelected == YES) {
+                                    LHSelectedPath *path = [LHSelectedPath pathWithFirstPath:firstIndex secondPath:secondIndex thirdPath:thirdIndex];
+                                    NSMutableArray *array = [self.selectedArray lastObject];
+                                    [array addObject:path];
+                                    firstNode.secondOpenStatus = LHTreeNodeSecondOpen;
+                                }
+                            }
+                            continue;
+                        }
+                        break;}
+                    default:
+                        break;
+                }
+          
+        }
+    }];
 }
 
 - (void)popupViewFromSourceFrame:(CGRect)frame completion:(void (^)(void))completion {
@@ -105,7 +147,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LHFiltersCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
     LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
-    cell.textLabel.text = [node title];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld",[node.idNumber integerValue]];;
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+   LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
+    return [node getCellHeight];
+}
+
+
 @end

@@ -29,6 +29,15 @@
 }
 
 
+- (void)setLayout:(LHLayout *)layout {
+    _leftLabel.text = layout.node.title;
+    _mediumLabel.text = @"全部";
+    
+    
+    
+    
+}
+
 #pragma mark - get
 - (UILabel *)leftLabel {
     if (_leftLabel == nil) {

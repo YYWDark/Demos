@@ -60,7 +60,7 @@ static const CGFloat FoldButtonSize = 14.0f;
 static const CGFloat FoldVerticalMargin = 10.0f;
 static const CGFloat FoldHorizontalMargin = 10.0f;
 
-static const CGFloat FoldToolViewHeight = 25.0f;
+static const CGFloat FoldToolViewHeight = 40.0f;
 static const CGFloat FoldButtonHeight = 25.0f;
 #define kScreenHeigth [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width

@@ -14,6 +14,7 @@
 @property (nonatomic, assign) CGFloat horizontalMargin;
 
 @property (nonatomic, assign) CGFloat toolViewHeight;
+
 @property (nonatomic, assign) CGFloat buttonHeight;
 @property (nonatomic, assign) CGFloat foldHeight;     //折叠时候的高度
 @property (nonatomic, assign) CGFloat totalHeight;    //展开的高度
@@ -25,5 +26,6 @@
 @property (nonatomic, strong) NSMutableArray *buttonPositionY;    //储存按钮的起点Y
 @property (nonatomic, strong) NSMutableArray *buttonWidthArray;   //储存按钮的宽度，每一个宽度不一样
 
+@property (nonatomic, strong) LHTreeNode *node;
 - (instancetype)initWithNode:(LHTreeNode *)node;
 @end

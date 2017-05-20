@@ -14,7 +14,8 @@
 @property (nonatomic, assign) CGRect sourceFrame;                                       /* tapBar的frame**/
 @property (nonatomic, strong) LHTree *tree;
 @property (nonatomic, strong) UITableView *mainTableView;
-
+@property (nonatomic, strong) NSArray *temporaryArray;                                  /* 暂存最初的状态**/
+@property (nonatomic, strong) NSMutableArray *selectedArray;                            /* 记录所选的item**/
 - (id)initWithTree:(LHTree *)tree;
 - (void)popupViewFromSourceFrame:(CGRect)frame completion:(void (^)(void))completion;
 
