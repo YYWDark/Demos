@@ -52,4 +52,6 @@ typedef NS_ENUM(NSUInteger, LHTreeNodeSecondStatus) {  //面料小类的展开�
 - (void)calculateLayout;
 
 - (CGFloat)getCellHeight;
+- (BOOL)isLargeClassSelected;
+- (LHTreeNode *)nodeOfLargeClassSelected;
 @end

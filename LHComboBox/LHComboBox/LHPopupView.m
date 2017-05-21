@@ -147,7 +147,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LHFiltersCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
     LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld",[node.idNumber integerValue]];;
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld",[node.idNumber integerValue]];
+    cell.node = node;
     return cell;
 }
 

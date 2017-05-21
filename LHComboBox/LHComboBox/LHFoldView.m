@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UILabel *leftLabel;
 @property (nonatomic, strong) UILabel *mediumLabel;
 @property (nonatomic, strong) UIImageView *imageView ;
-
+@property (nonatomic, strong) UIView *bgView;
 @end
 
 @implementation LHFoldView
@@ -29,12 +29,17 @@
 }
 
 
+
 - (void)setLayout:(LHLayout *)layout {
     _leftLabel.text = layout.node.title;
     _mediumLabel.text = @"全部";
     
-    
-    
+    for (int index = 0; index < layout.buttonWidthArray.count; index ++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake([layout.buttonPositionX[index] floatValue], [layout.buttonPositionY[index] floatValue], [layout.buttonWidthArray[index] floatValue], layout.buttonHeight);
+        [button setTitle:[layout.node.childrenNodes[index] title] forState:UIControlStateNormal];
+        [self addSubview:button];
+    }
     
 }
 
@@ -69,5 +74,12 @@
         _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pulldown.png"]];
     }
     return _imageView;
+}
+
+- (UIView *)bgView {
+    if (_bgView == nil) {
+        _bgView = [[UIView alloc] init];
+    }
+    return _bgView;
 }
 @end

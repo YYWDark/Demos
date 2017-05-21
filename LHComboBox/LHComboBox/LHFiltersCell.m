@@ -29,7 +29,26 @@
     
 }
 - (void)setNode:(LHTreeNode *)node {
-    [self.firstView setLayout:node.layout];
+    for (LHFoldView *view in self.subviews) {
+            [view removeFromSuperview];
+    }
+    
+    switch (node.numbersOfLayers) {
+        case 1:{
+            [self.firstView setLayout:node.layout];
+            break;}
+        case 2:
+            [self.firstView setLayout:node.layout];
+            if ([node isLargeClassSelected]) {
+                LHTreeNode *secondNode = [node nodeOfLargeClassSelected];
+                [self.secondView setLayout:secondNode.layout];
+            }
+           
+            break;
+        default:
+            break;
+    }
+    
 }
 
 
