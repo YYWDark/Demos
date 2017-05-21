@@ -27,7 +27,7 @@
     _lableFontSize = 14.0f;
     _buttonFontSize = 14.0f;
     _buttonHeight = 25.0f;
-    
+    _dropDwonButtonWidth = 40;
     //间距
     _verticalMargin = FoldVerticalMargin;
     _horizontalMargin = FoldHorizontalMargin;
@@ -45,7 +45,7 @@
        [self.buttonPositionX addObject:@(leftDitance)];
        [self.buttonPositionY addObject:@(topDitance)];
         
-       CGFloat width = [NSObject widthFromString:node.title withFont:[UIFont systemFontOfSize:_buttonFontSize] constraintToHeight:_buttonHeight];
+       CGFloat width = [NSObject widthFromString:[NSString stringWithFormat:@"%ld",[node.idNumber integerValue]] withFont:[UIFont systemFontOfSize:_buttonFontSize] constraintToHeight:_buttonHeight];
        [self.buttonWidthArray addObject:@(width)];
        
        if (width + leftDitance > kScreenWidth - _horizontalMargin) {
@@ -59,6 +59,11 @@
     
     //总的高度
     _totalHeight = [[self.buttonPositionY lastObject] floatValue] + _buttonHeight + _verticalMargin;
+    
+    
+    //宽度
+//    _leftWidth = [NSObject widthFromString:node.title withFont:[UIFont systemFontOfSize:_lableFontSize] constraintToHeight:_toolViewHeight];
+    _leftWidth = 60.0f;
     
 }
 

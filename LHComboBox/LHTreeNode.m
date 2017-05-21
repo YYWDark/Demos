@@ -60,9 +60,11 @@
     }else if (_firstOpenStatus == LHTreeNodeFirstOpen) {
         totalHeight += self.layout.totalHeight;
     }
+    //必须是有大类小类 而且大类一定需要被选中
     if (!(self.numbersOfLayers == 2 && [self isLargeClassSelected])) return totalHeight;
     
-    LHTreeNode * node = [self nodeOfLargeClassSelected];
+    
+    LHTreeNode * node = [[self nodesOfLargeClassSelected] lastObject];
     if (_secondOpenStatus == LHTreeNodeSecondClose) {
         totalHeight += node.layout.foldHeight;
     }else if (_secondOpenStatus == LHTreeNodeSecondOpen) {
@@ -79,11 +81,17 @@
     return NO;
 }
 
-- (LHTreeNode *)nodeOfLargeClassSelected {
-    for (int index = 0;index > 0; index ++) {
+- (NSArray *)nodesOfLargeClassSelected {
+    NSMutableArray *array = [NSMutableArray array];
+    //如果是三级的 那第二级一定是单选，存在的话只是返回一个 但是是二级就有可能返回多个了
+    for (int index = 0;index < self.childrenNodes.count; index ++) {
         LHTreeNode *node = self.childrenNodes[index];
-        if (node.isSelected == YES) return node;
+        if (node.isSelected == YES) {
+            [array addObject:node];
+        }
     }
-    return nil;
+    return array;
 }
+
+
 @end

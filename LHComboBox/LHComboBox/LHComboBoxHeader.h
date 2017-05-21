@@ -57,7 +57,7 @@ static const CGFloat DropDownBoxTitleHorizontalToLeft  = 10.0f;
 static const CGFloat FoldLableSize = 14.0f;
 static const CGFloat FoldButtonSize = 14.0f;
 
-static const CGFloat FoldVerticalMargin = 10.0f;
+static const CGFloat FoldVerticalMargin = 20.0f;
 static const CGFloat FoldHorizontalMargin = 10.0f;
 
 static const CGFloat FoldToolViewHeight = 40.0f;

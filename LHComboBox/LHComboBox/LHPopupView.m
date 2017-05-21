@@ -9,9 +9,9 @@
 #import "LHPopupView.h"
 #import "LHFiltersCell.h"
 #import "LHSelectedPath.h"
-@interface LHPopupView () <UITableViewDelegate, UITableViewDataSource>
+@interface LHPopupView () <UITableViewDelegate, UITableViewDataSource, LHFiltersCellDelegate>
 @property (nonatomic, strong) UIView *bottomView;
-
+@property (nonatomic, assign) NSInteger lastIndex;
 @end
 
 @implementation LHPopupView
@@ -26,6 +26,7 @@
 - (id)initWithTree:(LHTree *)tree {
     self = [self init];
     if (self) {
+        self.lastIndex = -1;
         self.tree = tree;
         [self _findSelectedItem];
     }
@@ -79,10 +80,12 @@
    self.frame = CGRectMake(0, top, kScreenWidth, 0);
    [rootView addSubview:self];
     
-    self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+    self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
+    self.mainTableView.backgroundColor = [UIColor darkTextColor];
     self.mainTableView.rowHeight = PopupViewRowHeight;
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    self.mainTableView.tableFooterView = [UIView new];
     [self.mainTableView registerClass:[LHFiltersCell class] forCellReuseIdentifier:MainCellID];
     [self addSubview:self.mainTableView];
     
@@ -92,7 +95,6 @@
         self.mainTableView.frame = self.bounds;
     } completion:^(BOOL finished) {
         completion();
-        
         self.height += PopupViewTabBarHeight;
         self.bottomView = [[UIView alloc] init];
         self.bottomView.backgroundColor = [UIColor colorWithHexString:@"FCFAFD"];
@@ -112,7 +114,6 @@
             [button addTarget:self action:@selector(respondsToButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.bottomView addSubview:button];
         }
-        
     }];
 }
 
@@ -139,23 +140,110 @@
 - (void)respondsToTapGestureRecognizer:(UITapGestureRecognizer *)tapGestureRecognizer {
    [self dismiss];
 }
+
 #pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.tree.rootNode.childrenNodes.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LHFiltersCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
-    LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld",[node.idNumber integerValue]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.section];
     cell.node = node;
+    cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.row];
-    return [node getCellHeight];
+   LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.section];
+    CGFloat heigth = [node getCellHeight];
+    NSLog(@"indexPath == %ld heigth == %lf",indexPath.section,heigth);
+    return heigth;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return .0001f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10.0f;
+}
+#pragma mark - LHFiltersCellDelegate
+- (void)filtersCell:(LHFiltersCell *)cell didTapTopViewAtIndex:(NSUInteger)index {
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    LHTreeNode *firstNode = self.tree.rootNode.childrenNodes[indexPath.section];
+    switch (index) {
+        case 0:{ //第一层，类似于大类
+            //收起其他项
+            for (int i = 0; i < self.tree.rootNode.childrenNodes.count; i ++) {
+                if (i == indexPath.section) continue;
+                LHTreeNode *node = self.tree.rootNode.childrenNodes[i];
+                node.firstOpenStatus = LHTreeNodeFirstClose;
+                node.secondOpenStatus = LHTreeNodeSecondClose;
+            }
+            
+            if (firstNode.firstOpenStatus == LHTreeNodeFirstClose) {
+                firstNode.firstOpenStatus = LHTreeNodeFirstOpen;
+            }else if (firstNode.firstOpenStatus == LHTreeNodeFirstOpen) {
+                firstNode.firstOpenStatus = LHTreeNodeFirstClose;
+                firstNode.secondOpenStatus = LHTreeNodeSecondClose;
+            }
+            
+            break;}
+        case 1:
+            if (firstNode.secondOpenStatus == LHTreeNodeSecondClose) {
+                firstNode.secondOpenStatus = LHTreeNodeSecondOpen;
+            }else if (firstNode.secondOpenStatus == LHTreeNodeSecondOpen) {
+                firstNode.secondOpenStatus = LHTreeNodeSecondClose;
+            }
+            break;
+        default:
+            break;
+    }
+    [self.mainTableView reloadData];
 }
 
 
+- (void)filtersCell:(LHFiltersCell *)cell didTapButtonAtIndex:(NSUInteger)index topViewTag:(NSUInteger)tag; {
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    LHTreeNode *firstNode = self.tree.rootNode.childrenNodes[indexPath.section];
+    
+    switch (tag) {
+        case 0:{ //第一层，类似于大类
+              LHTreeNode *secondNode = firstNode.childrenNodes[index];
+            if (firstNode.numbersOfLayers == 1) {//多选
+                secondNode.isSelected = !secondNode.isSelected;
+            }else {//单选
+                //先找出之前可能选中的设置为NO
+                if([firstNode isLargeClassSelected]){
+                    LHTreeNode *node = [[firstNode nodesOfLargeClassSelected] lastObject];
+                    if (node == secondNode) {//如果是同一个,取消并且收起来第三列
+                        node.isSelected = NO;
+                        firstNode.secondOpenStatus =  LHTreeNodeSecondClose;
+                        [self.mainTableView reloadData];
+                        return;
+                    }
+                    node.isSelected = NO;
+                }
+                secondNode.isSelected = YES;
+                firstNode.secondOpenStatus =  LHTreeNodeSecondOpen;
+            }
+            
+            break;}
+        case 1:{
+            LHTreeNode *selectedNode = [[firstNode nodesOfLargeClassSelected] lastObject];
+            LHTreeNode *thirdNode = selectedNode.childrenNodes[index];
+            thirdNode.isSelected = !thirdNode.isSelected;
+            break;}
+        default:
+            break;
+    }
+    [self.mainTableView reloadData];
+
+}
 @end

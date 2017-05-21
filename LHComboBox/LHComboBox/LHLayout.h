@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 @class LHTreeNode;
 @interface LHLayout : NSObject
+@property (nonatomic, assign) CGFloat leftWidth;
+@property (nonatomic, assign) CGFloat rightWidth;
+@property (nonatomic, assign) CGFloat dropDwonButtonWidth;
 @property (nonatomic, assign) CGFloat verticalMargin;
 @property (nonatomic, assign) CGFloat horizontalMargin;
 
