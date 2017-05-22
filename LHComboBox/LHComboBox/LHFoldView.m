@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *mediumLabel;
 @property (nonatomic, strong) UIImageView *imageView ;
 @property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) CALayer *line;
 @end
 
 @implementation LHFoldView
@@ -26,6 +27,7 @@
         self.foldViewStatus = LHFoldViewClose;
         [self addSubview:self.topView];
         [self.topView addSubview:self.leftLabel];
+        [self.topView.layer addSublayer:self.line];
         [self.topView addSubview:self.mediumLabel];
         [self.topView addSubview:self.imageView];
         
@@ -43,7 +45,12 @@
         NSArray *array = [layout.node nodesOfLargeClassSelected];
        NSMutableString *title = [NSMutableString string];
         [array enumerateObjectsUsingBlock:^(LHTreeNode * node, NSUInteger idx, BOOL * _Nonnull stop) {
-            [title appendString:[NSString stringWithFormat:@";%@",[NSString stringWithFormat:@"%ld",[[node idNumber] integerValue]]]];
+            if (idx == 0) {
+              [title appendString:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%ld",[[node idNumber] integerValue]]]];
+            }else {
+              [title appendString:[NSString stringWithFormat:@"，%@",[NSString stringWithFormat:@"%ld",[[node idNumber] integerValue]]]];  
+            }
+            
         }];
         mediumStr = [title copy];
     }
@@ -52,6 +59,8 @@
     //frame
     _topView.frame = CGRectMake(0, 0, kScreenWidth, layout.toolViewHeight);
     _leftLabel.frame = CGRectMake(layout.horizontalMargin, 0, layout.leftWidth, layout.toolViewHeight);
+    _line.frame = CGRectMake(_leftLabel.right, _leftLabel.top + 5, 1, layout.toolViewHeight - 10);
+    
     _mediumLabel.frame = CGRectMake(_leftLabel.right + layout.horizontalMargin, _leftLabel.top, kScreenWidth - 2*layout.horizontalMargin - layout.dropDwonButtonWidth - _leftLabel.right - layout.horizontalMargin, layout.toolViewHeight);
     
         if (self.foldViewStatus == LHFoldViewClose) {
@@ -100,6 +109,7 @@
     if (_leftLabel == nil) {
         _leftLabel = [[UILabel alloc] init];
         _leftLabel.font = [UIFont systemFontOfSize:FoldLableSize];
+        _leftLabel.textAlignment = NSTextAlignmentCenter;
 #ifdef Debug
         _leftLabel.backgroundColor = [UIColor redColor];
 #endif
@@ -149,5 +159,13 @@
 #endif
     }
     return _bgView;
+}
+
+- (CALayer *)line {
+    if (_line == nil) {
+        _line = [CALayer layer];
+        _line.backgroundColor = [UIColor colorWithHexString:@"3797FF"].CGColor;
+    }
+    return _line;
 }
 @end

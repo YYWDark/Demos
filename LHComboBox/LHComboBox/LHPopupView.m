@@ -76,12 +76,12 @@
    UIView *rootView = [[UIApplication sharedApplication] keyWindow];
    self.sourceFrame = frame;
    CGFloat top =  CGRectGetMaxY(self.sourceFrame);
-   CGFloat resultHeight = kScreenHeigth - top - DistanceBeteewnPopupViewAndBottom;
+   CGFloat resultHeight = kScreenHeigth - top - PopupViewTabBarHeight;
    self.frame = CGRectMake(0, top, kScreenWidth, 0);
    [rootView addSubview:self];
     
     self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
-    self.mainTableView.backgroundColor = [UIColor darkTextColor];
+    self.mainTableView.backgroundColor = [UIColor colorWithHexString:@"E7E7E7"];
     self.mainTableView.rowHeight = PopupViewRowHeight;
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
@@ -101,10 +101,10 @@
         self.bottomView.frame = CGRectMake(0, self.mainTableView.bottom, self.width, PopupViewTabBarHeight);
         [self addSubview:self.bottomView];
         
-        NSArray *titleArray = @[@"取消",@"确定"];
+        NSArray *titleArray = @[@"重置",@"开始筛选"];
         for (int i = 0; i < 2 ; i++) {
             CGFloat left = ((i == 0)?ButtonHorizontalMargin:self.width - ButtonHorizontalMargin - 100);
-            UIColor *titleColor = ((i == 0)?[UIColor blackColor]:[UIColor colorWithHexString:titleSelectedColor]);
+            UIColor *titleColor = ((i == 0)?[UIColor blackColor]:[UIColor colorWithHexString:@"3797FF"]);
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(left, 0, 100, PopupViewTabBarHeight);
             button.tag = i;
@@ -167,11 +167,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return .0001f;
+    return 0.0001f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10.0f;
+    return 5.0f;
 }
 #pragma mark - LHFiltersCellDelegate
 - (void)filtersCell:(LHFiltersCell *)cell didTapTopViewAtIndex:(NSUInteger)index {
