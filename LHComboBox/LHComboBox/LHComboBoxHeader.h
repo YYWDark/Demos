@@ -14,6 +14,7 @@
 #define scale [UIScreen mainScreen].scale
 static  NSString *titleSelectedColor = @"4EBC72";
 static const CGFloat  ButtonFontSize = 14.0f;
+
 //MMPopupView
 static const CGFloat PopupViewRowHeight = 44.0f;
 static const CGFloat DistanceBeteewnPopupViewAndBottom =80.0f;

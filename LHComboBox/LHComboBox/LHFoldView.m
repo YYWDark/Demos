@@ -33,40 +33,22 @@
         [self.topView.layer addSublayer:self.line];
         [self.topView addSubview:self.mediumLabel];
         [self.topView addSubview:self.imageView];
+        //小类的时候才有指向大类的图标
         if (tag == 1) {
             [self.topView.layer addSublayer:self.line2];
         }
-        
-        
         [self addSubview:self.bgView];
         [self.bgView.layer addSublayer:self.line1];
     }
     return self;
 }
 
-//- (instancetype)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        self.userInteractionEnabled = YES;
-//        self.foldViewStatus = LHFoldViewClose;
-//        [self addSubview:self.topView];
-//        [self.topView addSubview:self.leftLabel];
-//        [self.topView.layer addSublayer:self.line];
-//        [self.topView addSubview:self.mediumLabel];
-//        [self.topView addSubview:self.imageView];
-//       
-//        [self addSubview:self.bgView];
-//        [self.bgView.layer addSublayer:self.line1];
-//    }
-//    return self;
-//}
-
 - (void)setLayout:(LHLayout *)layout {
     _leftLabel.text = [NSString stringWithFormat:@"%ld",[layout.node.idNumber integerValue]];
     //默认显示
     NSString *mediumStr  = @"全部";
     if ([layout.node isLargeClassSelected]) {
-        //如果下一级有选中则不显示全部
+        //如果下一级有选中则不显示全部，拼接显示出来
         NSArray *array = [layout.node nodesOfLargeClassSelected];
        NSMutableString *title = [NSMutableString string];
         [array enumerateObjectsUsingBlock:^(LHTreeNode * node, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -89,6 +71,7 @@
     _mediumLabel.frame = CGRectMake(_leftLabel.right + layout.horizontalMargin, _leftLabel.top, kScreenWidth -layout.horizontalMargin - 20 - layout.dropDwonButtonWidth - _leftLabel.right - layout.horizontalMargin, layout.toolViewHeight);
     _imageView.frame = CGRectMake(_mediumLabel.right + layout.horizontalMargin , 15, layout.dropDwonButtonWidth, layout.toolViewHeight - 30);
     
+    //避免复用所以要直接移除掉再添加，对于相同个数的可以考虑添加到数组里面复用修改其信息
     if (self.bgView.subviews.count) {
         for (UIButton *btn in self.bgView.subviews) {
             [btn removeFromSuperview];
@@ -102,6 +85,7 @@
         self.bgView.hidden = NO;
         self.bgView.frame = CGRectMake(0, _topView.bottom, kScreenWidth, layout.totalHeight - layout.foldHeight);
     }
+    
     _line1.frame = CGRectMake(layout.leftWidth/2, 0, kScreenWidth - layout.leftWidth/2, 1);
     for (int index = 0; index < layout.buttonWidthArray.count; index ++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -119,6 +103,7 @@
     
 }
 
+//根据status显示图标的状态
 - (void)updateImageViewWithStatus:(LHFoldViewStatus )status {
     if (status == LHFoldViewClose) {
         self.imageView.image = [UIImage imageNamed:@"pull_down.png"];

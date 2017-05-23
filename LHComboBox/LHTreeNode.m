@@ -53,7 +53,7 @@
     self.layout = [[LHLayout alloc] initWithNode:self];;
 }
 
-//拿到现在cell的高度
+//拿到现在cell的高度，
 - (CGFloat)getCellHeight {
    CGFloat totalHeight;
     if (_firstOpenStatus == LHTreeNodeFirstClose) {
@@ -82,9 +82,9 @@
     return NO;
 }
 
+  //如果是三级的 那第二级一定是单选，存在的话只是返回一个 但是是二级就有可能返回多个了
 - (NSArray *)nodesOfLargeClassSelected {
     NSMutableArray *array = [NSMutableArray array];
-    //如果是三级的 那第二级一定是单选，存在的话只是返回一个 但是是二级就有可能返回多个了
     for (int index = 0;index < self.childrenNodes.count; index ++) {
         LHTreeNode *node = self.childrenNodes[index];
         if (node.isSelected == YES) {

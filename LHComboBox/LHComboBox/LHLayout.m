@@ -46,7 +46,6 @@
       
        CGFloat width = [NSObject widthFromString:[NSString stringWithFormat:@"%ld",[node.idNumber integerValue]] withFont:[UIFont systemFontOfSize:_buttonFontSize] constraintToHeight:_buttonHeight] + 20;
        [self.buttonWidthArray addObject:@(width)];
-        NSInteger number = [node.idNumber integerValue];
         //如果加起来的长度大于了屏幕的长度 那就应该换行了
        if (width + leftDitance > kScreenWidth - _horizontalMargin) {
             leftDitance = _horizontalMargin;

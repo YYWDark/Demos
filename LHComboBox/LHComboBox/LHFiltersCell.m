@@ -35,11 +35,11 @@
     [_firstView removeFromSuperview];
     
     _node = node;
-    CGFloat firstViewHeight = (node.firstOpenStatus == LHTreeNodeFirstClose)?self.node.layout.foldHeight:self.node.layout.totalHeight;
     
-        _firstView = [[LHFoldView alloc] initWithFrame:CGRectMake(0 ,0 ,kScreenWidth,firstViewHeight) tag:0];
-        _firstView.delegate = self;
-        [self addSubview:_firstView];
+    CGFloat firstViewHeight = (node.firstOpenStatus == LHTreeNodeFirstClose)?self.node.layout.foldHeight:self.node.layout.totalHeight;
+    _firstView = [[LHFoldView alloc] initWithFrame:CGRectMake(0 ,0 ,kScreenWidth,firstViewHeight) tag:0];
+    _firstView.delegate = self;
+    [self addSubview:_firstView];
    
     self.firstView.foldViewStatus = (node.firstOpenStatus == LHTreeNodeFirstClose)?LHFoldViewClose:LHFoldViewOpen;
     [self.firstView setLayout:node.layout];
@@ -84,25 +84,4 @@
     }
 }
 
-
-//- (LHFoldView *)firstView {
-//    if (_firstView == nil) {
-//        
-//        _firstView = [[LHFoldView alloc] initWithFrame:CGRectMake(0 ,0 ,kScreenWidth,self.node.layout.foldHeight)];
-//        _firstView.delegate = self;
-//        _firstView.tag = 0;
-//        [self addSubview:_firstView];
-//    }
-//    return _firstView;
-//}
-
-//- (LHFoldView *)secondView {
-//    if (_secondView == nil) {
-//        _secondView = [[LHFoldView alloc] initWithFrame:CGRectMake(0, _firstView.top, kScreenWidth, self.node.layout.foldHeight)];
-//        _secondView.delegate = self;
-//        _secondView.tag = 1;
-//        [self addSubview:_secondView];
-//    }
-//    return _secondView;
-//}
 @end

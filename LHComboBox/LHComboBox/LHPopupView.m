@@ -73,6 +73,7 @@
 
 //清除掉self.selectedArray里面的选中项
 - (void)_clearItemsStateOfSelectedArray {
+    //可能e
     for (LHTreeNode *firstNode in self.tree.rootNode.childrenNodes) {
         if (firstNode.numbersOfLayers == 2) {
             for (LHTreeNode *node in firstNode.childrenNodes) {
@@ -166,7 +167,6 @@
 }
 
 - (void)dismiss{
-    
     if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss:)]) {
         [self.delegate popupViewWillDismiss:self];
     }
@@ -248,6 +248,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.section];
     CGFloat heigth = [node getCellHeight];
+    NSLog(@"heigth == %lf",heigth);
     return heigth;
 }
 

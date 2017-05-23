@@ -62,6 +62,7 @@
 
 //判断第一层的子树的深度
 - (void)calculateNumbersLayersOfTreeFirstNode {
+    
     for (LHTreeNode *firstNode in self.rootNode.childrenNodes) {
         LHTreeNode *currentNode = firstNode;
         NSUInteger numbersOflayers = 0;
@@ -72,6 +73,8 @@
         [firstNode settingAboutnumbersOfLayers:numbersOflayers];
         NSLog(@"当前子视图的深度：%ld 节点名称:%@",firstNode.numbersOfLayers,firstNode.title);
     }
+    
+    
 }
 
 
