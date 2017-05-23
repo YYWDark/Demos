@@ -17,7 +17,7 @@ static const CGFloat  ButtonFontSize = 14.0f;
 //MMPopupView
 static const CGFloat PopupViewRowHeight = 44.0f;
 static const CGFloat DistanceBeteewnPopupViewAndBottom =80.0f;
-static const CGFloat PopupViewTabBarHeight = 60.0f;
+static const CGFloat PopupViewTabBarHeight = 40.0f;
 static const CGFloat LeftCellHorizontalMargin = 10.0f;
 static CGFloat LeftCellWidth = 100.0f;
 static const CGFloat ShadowAlpha = 0.5;
@@ -33,6 +33,9 @@ static const CGFloat SubTitleFontSize = 12.0f;
 /* color */
 static  NSString *SelectedBGColor = @"F2F2F2";
 static  NSString *UnselectedBGColor = @"FFFFFF";
+
+static NSString *ThemeColor = @"3797FF";
+static NSString *LightColor = @"cccccc";
 //MMComBoBoxView
 
 //MMCombinationFitlerView
@@ -57,10 +60,10 @@ static const CGFloat DropDownBoxTitleHorizontalToLeft  = 10.0f;
 static const CGFloat FoldLableSize = 14.0f;
 static const CGFloat FoldButtonSize = 14.0f;
 
-static const CGFloat FoldVerticalMargin = 20.0f;
+static const CGFloat FoldVerticalMargin = 10.0f;
 static const CGFloat FoldHorizontalMargin = 10.0f;
 
-static const CGFloat FoldToolViewHeight = 49.0f;
+static const CGFloat FoldToolViewHeight = 44.0f;
 static const CGFloat FoldButtonHeight = 25.0f;
 #define kScreenHeigth [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width

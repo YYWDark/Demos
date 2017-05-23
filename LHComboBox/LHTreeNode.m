@@ -40,11 +40,11 @@
     return node;
 }
 
-
 - (void)addNode:(LHTreeNode *)node {
     [self.childrenNodes addObject:node];
 }
 
+//设置第一层的树的子树有几层
 - (void)settingAboutnumbersOfLayers:(NSInteger)count {
     _numbersOfLayers = count;
 }
@@ -53,6 +53,7 @@
     self.layout = [[LHLayout alloc] initWithNode:self];;
 }
 
+//拿到现在cell的高度
 - (CGFloat)getCellHeight {
    CGFloat totalHeight;
     if (_firstOpenStatus == LHTreeNodeFirstClose) {

@@ -24,11 +24,11 @@
 }
 
 - (void)layoutWithNode:(LHTreeNode *)node {
-    int number = [node.idNumber integerValue];
+    
     _lableFontSize = 14.0f;
     _buttonFontSize = 14.0f;
     _buttonHeight = 35.0f;
-    _dropDwonButtonWidth = 40;
+    _dropDwonButtonWidth = 18;
     //间距
     _verticalMargin = FoldVerticalMargin;
     _horizontalMargin = FoldHorizontalMargin;
@@ -44,19 +44,18 @@
    __block CGFloat topDitance =  _totalHeight + _verticalMargin;
     [node.childrenNodes enumerateObjectsUsingBlock:^(LHTreeNode * _Nonnull node, NSUInteger idx, BOOL * _Nonnull stop) {
       
-       [self.buttonPositionY addObject:@(topDitance)];
-        
        CGFloat width = [NSObject widthFromString:[NSString stringWithFormat:@"%ld",[node.idNumber integerValue]] withFont:[UIFont systemFontOfSize:_buttonFontSize] constraintToHeight:_buttonHeight] + 20;
        [self.buttonWidthArray addObject:@(width)];
         NSInteger number = [node.idNumber integerValue];
+        //如果加起来的长度大于了屏幕的长度 那就应该换行了
        if (width + leftDitance > kScreenWidth - _horizontalMargin) {
             leftDitance = _horizontalMargin;
-            topDitance += (_buttonHeight + _verticalMargin);
-            [self.buttonPositionX addObject:@(leftDitance)];
-       }else {
-            [self.buttonPositionX addObject:@(leftDitance)];
-           leftDitance += (width + _horizontalMargin);
+            topDitance = (_buttonHeight + _verticalMargin + topDitance);
        }
+
+          [self.buttonPositionX addObject:@(leftDitance)];
+          [self.buttonPositionY addObject:@(topDitance)];
+          leftDitance = (width + _horizontalMargin + leftDitance);
         
     }];
     

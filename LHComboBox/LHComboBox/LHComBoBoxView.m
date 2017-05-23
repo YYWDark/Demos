@@ -10,7 +10,7 @@
 #import "LHDropDownBox.h"
 #import "LHBasePopupView.h"
 
-@interface LHComBoBoxView () <LHDropDownBoxDelegate>
+@interface LHComBoBoxView () <LHDropDownBoxDelegate, LHBasePopupViewDelegate>
 @property (nonatomic, strong) NSMutableArray <LHDropDownBox *>*dropDownBoxArray;
 @property (nonatomic, strong) NSMutableArray <LHTree *>*itemArray;
 @property (nonatomic, strong) NSMutableArray <LHBasePopupView *>*symbolArray;  /*当成一个队列来标记那个弹出视图**/
@@ -42,7 +42,6 @@
     if ([self.dataSource respondsToSelector:@selector(comBoBoxView:infomationForColumn:)]) {
         for (NSUInteger i = 0; i < count; i ++) {
             LHTree *tree = [self.dataSource comBoBoxView:self infomationForColumn:i];
-            
             LHDropDownBox *dropBox = [[LHDropDownBox alloc] initWithFrame:CGRectMake(i*width, 0, width, self.height) titleName:tree.rootNode.title];
             dropBox.tag = i;
             dropBox.delegate = self;
@@ -75,6 +74,7 @@
 - (void)didTapDropDownBox:(LHDropDownBox *)dropDownBox atIndex:(NSUInteger)index {
      if (self.isAnimation == YES) return;
     
+    //点击后更新item的颜色状态
     for (int i = 0; i <self.dropDownBoxArray.count; i++) {
         LHDropDownBox *currentBox  = self.dropDownBoxArray[i];
         [currentBox updateTitleState:(i == index)];
@@ -91,12 +91,28 @@
         self.isAnimation = YES;
         LHTree *tree = self.itemArray[index];
         LHBasePopupView *popupView = [LHBasePopupView getSubPopupViewWithTree:tree];
+        popupView.delegate = self;
         popupView.tag = index;
         self.popupView = popupView;
         [popupView popupViewFromSourceFrame:self.frame completion:^{
             self.isAnimation = NO;
         }];
         [self.symbolArray addObject:popupView];
+    }
+}
+
+#pragma mark - MMPopupViewDelegate
+- (void)popupView:(LHBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index {
+    if ([self.delegate respondsToSelector:@selector(comBoBoxView:didSelectedItemsPackagingInArray:atIndex:)]) {
+        [self.delegate comBoBoxView:self didSelectedItemsPackagingInArray:array atIndex:index];
+    }
+}
+
+- (void)popupViewWillDismiss:(LHBasePopupView *)popupView {
+    [self.symbolArray removeAllObjects];
+    //当视图消失的时候更新LHDropDownBox的状态
+    for (LHDropDownBox *currentBox in self.dropDownBoxArray) {
+        [currentBox updateTitleState:NO];
     }
 }
 @end

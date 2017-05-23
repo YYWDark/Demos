@@ -17,10 +17,13 @@
 @property (nonatomic, strong) UIImageView *imageView ;
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) CALayer *line;
+@property (nonatomic, strong) CALayer *line1;
+@property (nonatomic, strong) CAShapeLayer *line2;
 @end
 
 @implementation LHFoldView
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame tag:(NSUInteger)tag {
+    self.tag = tag;
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
@@ -30,11 +33,33 @@
         [self.topView.layer addSublayer:self.line];
         [self.topView addSubview:self.mediumLabel];
         [self.topView addSubview:self.imageView];
+        if (tag == 1) {
+            [self.topView.layer addSublayer:self.line2];
+        }
+        
         
         [self addSubview:self.bgView];
+        [self.bgView.layer addSublayer:self.line1];
     }
     return self;
 }
+
+//- (instancetype)initWithFrame:(CGRect)frame {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        self.userInteractionEnabled = YES;
+//        self.foldViewStatus = LHFoldViewClose;
+//        [self addSubview:self.topView];
+//        [self.topView addSubview:self.leftLabel];
+//        [self.topView.layer addSublayer:self.line];
+//        [self.topView addSubview:self.mediumLabel];
+//        [self.topView addSubview:self.imageView];
+//       
+//        [self addSubview:self.bgView];
+//        [self.bgView.layer addSublayer:self.line1];
+//    }
+//    return self;
+//}
 
 - (void)setLayout:(LHLayout *)layout {
     _leftLabel.text = [NSString stringWithFormat:@"%ld",[layout.node.idNumber integerValue]];
@@ -55,40 +80,51 @@
         mediumStr = [title copy];
     }
     _mediumLabel.text = mediumStr;
-    
+    [self updateImageViewWithStatus:self.foldViewStatus];
     //frame
     _topView.frame = CGRectMake(0, 0, kScreenWidth, layout.toolViewHeight);
     _leftLabel.frame = CGRectMake(layout.horizontalMargin, 0, layout.leftWidth, layout.toolViewHeight);
-    _line.frame = CGRectMake(_leftLabel.right, _leftLabel.top + 5, 1, layout.toolViewHeight - 10);
+    _line.frame = CGRectMake(_leftLabel.right, _leftLabel.top + 15, 1, layout.toolViewHeight - 30);
+
+    _mediumLabel.frame = CGRectMake(_leftLabel.right + layout.horizontalMargin, _leftLabel.top, kScreenWidth -layout.horizontalMargin - 20 - layout.dropDwonButtonWidth - _leftLabel.right - layout.horizontalMargin, layout.toolViewHeight);
+    _imageView.frame = CGRectMake(_mediumLabel.right + layout.horizontalMargin , 15, layout.dropDwonButtonWidth, layout.toolViewHeight - 30);
     
-    _mediumLabel.frame = CGRectMake(_leftLabel.right + layout.horizontalMargin, _leftLabel.top, kScreenWidth - 2*layout.horizontalMargin - layout.dropDwonButtonWidth - _leftLabel.right - layout.horizontalMargin, layout.toolViewHeight);
+    if (self.bgView.subviews.count) {
+        for (UIButton *btn in self.bgView.subviews) {
+            [btn removeFromSuperview];
+        }
+    }
     
-        if (self.foldViewStatus == LHFoldViewClose) {
-            self.bgView.hidden = YES;
-             self.bgView.frame = CGRectMake(0, _topView.bottom, kScreenWidth, 0);
-        }else if (self.foldViewStatus == LHFoldViewOpen){
-            self.bgView.hidden = NO;
-            self.bgView.frame = CGRectMake(0, _topView.bottom, kScreenWidth, layout.totalHeight - layout.foldHeight);
-        }
-        
-        if (self.bgView.subviews.count) {
-            for (UIButton *btn in self.bgView.subviews) {
-                [btn removeFromSuperview];
-            }
-        }
-        
-        for (int index = 0; index < layout.buttonWidthArray.count; index ++) {
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-            button.frame = CGRectMake([layout.buttonPositionX[index] floatValue], [layout.buttonPositionY[index] floatValue] - layout.foldHeight, [layout.buttonWidthArray[index] floatValue], layout.buttonHeight);
-            [button setTitle: [NSString stringWithFormat:@"%ld",[[layout.node.childrenNodes[index] idNumber] integerValue]] forState:UIControlStateNormal];
-            button.backgroundColor = [layout.node.childrenNodes[index] isSelected] ?[UIColor greenColor]:[UIColor yellowColor];
-            button.titleLabel.font = [UIFont systemFontOfSize:layout.buttonFontSize];
-            [button addTarget:self action:@selector(resopndsToButtonTap:) forControlEvents:UIControlEventTouchUpInside];
-            button.tag = index;
-            [self.bgView addSubview:button];
-        }
-        
- 
+    if (self.foldViewStatus == LHFoldViewClose) {
+        self.bgView.hidden = YES;
+        self.bgView.frame = CGRectMake(0, _topView.bottom, kScreenWidth, 0);
+    }else if (self.foldViewStatus == LHFoldViewOpen){
+        self.bgView.hidden = NO;
+        self.bgView.frame = CGRectMake(0, _topView.bottom, kScreenWidth, layout.totalHeight - layout.foldHeight);
+    }
+    _line1.frame = CGRectMake(layout.leftWidth/2, 0, kScreenWidth - layout.leftWidth/2, 1);
+    for (int index = 0; index < layout.buttonWidthArray.count; index ++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake([layout.buttonPositionX[index] floatValue], [layout.buttonPositionY[index] floatValue] - layout.foldHeight, [layout.buttonWidthArray[index] floatValue], layout.buttonHeight);
+        [button setTitle: [NSString stringWithFormat:@"%ld",[[layout.node.childrenNodes[index] idNumber] integerValue]] forState:UIControlStateNormal];
+        button.backgroundColor = [layout.node.childrenNodes[index] isSelected]?[UIColor colorWithHexString:ThemeColor]:[UIColor whiteColor];
+        [button setTitleColor:[layout.node.childrenNodes[index] isSelected]?[UIColor whiteColor]:[UIColor colorWithHexString:LightColor] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:layout.buttonFontSize];
+        [button addTarget:self action:@selector(resopndsToButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = index;
+        button.layer.borderWidth = 1.0f;
+        button.layer.borderColor = [UIColor colorWithHexString:LightColor].CGColor;
+        [self.bgView addSubview:button];
+    }
+    
+}
+
+- (void)updateImageViewWithStatus:(LHFoldViewStatus )status {
+    if (status == LHFoldViewClose) {
+        self.imageView.image = [UIImage imageNamed:@"pull_down.png"];
+    }else {
+        self.imageView.image = [UIImage imageNamed:@"pull_up"];
+    }
 }
 
 #pragma mark - action
@@ -113,7 +149,6 @@
 #ifdef Debug
         _leftLabel.backgroundColor = [UIColor redColor];
 #endif
-//        [self addSubview:_leftLabel];
     }
     return _leftLabel;
 }
@@ -122,11 +157,10 @@
     if (_mediumLabel == nil) {
         _mediumLabel = [[UILabel alloc] init];
         _mediumLabel.font = [UIFont systemFontOfSize:FoldLableSize];
-        _mediumLabel.textColor = [UIColor redColor];
+        _mediumLabel.textColor = [UIColor colorWithHexString:LightColor];
 #ifdef Debug
         _mediumLabel.backgroundColor = [UIColor purpleColor];
 #endif
-//        [self addSubview:_mediumLabel];
     }
     return _mediumLabel;
 }
@@ -145,8 +179,8 @@
 }
 
 - (UIImageView *)imageView {
-    if (_imageView != nil) {
-        _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pulldown.png"]];
+    if (_imageView == nil) {
+        _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pull_down.png"]];
     }
     return _imageView;
 }
@@ -164,8 +198,39 @@
 - (CALayer *)line {
     if (_line == nil) {
         _line = [CALayer layer];
-        _line.backgroundColor = [UIColor colorWithHexString:@"3797FF"].CGColor;
+        _line.backgroundColor = [UIColor colorWithHexString:ThemeColor].CGColor;
     }
     return _line;
+}
+
+- (CALayer *)line1 {
+    if (_line1 == nil) {
+        _line1 = [CALayer layer];
+        _line1.backgroundColor = [UIColor colorWithHexString:LightColor].CGColor;
+    }
+    return _line1;
+}
+
+-(CAShapeLayer *)line2 {
+    if (_line2 == nil){
+        _line2 = [CAShapeLayer layer];
+        _line2.path = [self bezierPath].CGPath;
+        _line2.fillColor = [UIColor clearColor].CGColor;
+        _line2.strokeColor = [UIColor colorWithHexString:LightColor].CGColor;
+    }
+    return _line2;
+}
+
+- (UIBezierPath *)bezierPath {
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    bezierPath.lineWidth = 1;
+    bezierPath.lineCapStyle = kCGLineCapRound;
+    bezierPath.lineJoinStyle = kCGLineCapRound;
+    [bezierPath moveToPoint:CGPointMake(10, 5)];
+    [bezierPath addLineToPoint:CGPointMake(40, 5)];
+    [bezierPath addLineToPoint:CGPointMake(45, 0)];
+    [bezierPath addLineToPoint:CGPointMake(50, 5)];
+    [bezierPath addLineToPoint:CGPointMake(kScreenWidth, 5)];
+    return bezierPath;
 }
 @end

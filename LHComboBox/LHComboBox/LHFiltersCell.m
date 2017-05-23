@@ -31,22 +31,16 @@
     
 }
 - (void)setNode:(LHTreeNode *)node {
+    [_secondView removeFromSuperview];
+    [_firstView removeFromSuperview];
+    
     _node = node;
-//    for (LHFoldView *view in self.subviews) {
-//            [view removeFromSuperview];
-//    }
-//    [_firstView removeFromSuperview];
-//    [_secondView removeFromSuperview];
-//    
     CGFloat firstViewHeight = (node.firstOpenStatus == LHTreeNodeFirstClose)?self.node.layout.foldHeight:self.node.layout.totalHeight;
-    if (_firstView == nil) {
-        _firstView = [[LHFoldView alloc] initWithFrame:CGRectMake(0 ,0 ,kScreenWidth,firstViewHeight)];
+    
+        _firstView = [[LHFoldView alloc] initWithFrame:CGRectMake(0 ,0 ,kScreenWidth,firstViewHeight) tag:0];
         _firstView.delegate = self;
-        _firstView.tag = 0;
         [self addSubview:_firstView];
-    }else {
-        _firstView.frame = CGRectMake(0 ,0 ,kScreenWidth,firstViewHeight);
-    }
+   
     self.firstView.foldViewStatus = (node.firstOpenStatus == LHTreeNodeFirstClose)?LHFoldViewClose:LHFoldViewOpen;
     [self.firstView setLayout:node.layout];
     
@@ -54,27 +48,23 @@
         case 1:{
             
             break;}
-        case 2:
+        case 2:{
             if ([node isLargeClassSelected]) {
                 LHTreeNode *secondNode = [[node nodesOfLargeClassSelected] lastObject] ;
                 secondNode.firstOpenStatus = node.firstOpenStatus;
                 secondNode.secondOpenStatus = node.secondOpenStatus;
                 CGFloat secondViewHeight = (node.secondOpenStatus == LHTreeNodeFirstClose)?secondNode.layout.foldHeight:secondNode.layout.totalHeight;
-                if (_secondView == nil) {
-                    _secondView = [[LHFoldView alloc] initWithFrame:CGRectMake(0, _firstView.bottom, kScreenWidth, secondViewHeight)];
+                
+                    _secondView = [[LHFoldView alloc] initWithFrame:CGRectMake(0, _firstView.bottom, kScreenWidth, secondViewHeight) tag:1];
                     _secondView.delegate = self;
-                    _secondView.tag = 1;
                     [self addSubview:_secondView];
-                }else {
-                    _secondView.frame = CGRectMake(0, _firstView.bottom, kScreenWidth, secondViewHeight);
-                }
                 _secondView.hidden = NO;
                 self.secondView.foldViewStatus = (secondNode.secondOpenStatus == LHTreeNodeSecondClose)?LHFoldViewClose:LHFoldViewOpen;
                 [self.secondView setLayout:secondNode.layout];
             }else {
                 _secondView.hidden = YES;
             }
-           
+        }
             break;
         default:
             break;

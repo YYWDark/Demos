@@ -32,6 +32,8 @@
 		75144E991ECEE488002BFD56 /* LHLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E981ECEE488002BFD56 /* LHLayout.m */; };
 		75144E9C1ED0080D002BFD56 /* NSObject+Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */; };
 		75144E9F1ED01C39002BFD56 /* LHSelectedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */; };
+		75144EA31ED27E34002BFD56 /* pull_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75144EA11ED27E34002BFD56 /* pull_up@2x.png */; };
+		75144EA51ED27E86002BFD56 /* pull_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75144EA41ED27E86002BFD56 /* pull_down@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,8 +100,10 @@
 		75144E981ECEE488002BFD56 /* LHLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHLayout.m; sourceTree = "<group>"; };
 		75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Calculate.h"; sourceTree = "<group>"; };
 		75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Calculate.m"; sourceTree = "<group>"; };
-		75144E9D1ED01C39002BFD56 /* LHSelectedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHSelectedPath.h; sourceTree = "<group>"; };
-		75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHSelectedPath.m; sourceTree = "<group>"; };
+		75144E9D1ED01C39002BFD56 /* LHSelectedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LHSelectedPath.h; path = ../LHSelectedPath.h; sourceTree = "<group>"; };
+		75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LHSelectedPath.m; path = ../LHSelectedPath.m; sourceTree = "<group>"; };
+		75144EA11ED27E34002BFD56 /* pull_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_up@2x.png"; sourceTree = "<group>"; };
+		75144EA41ED27E86002BFD56 /* pull_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull_down@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,11 +131,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		75144E241ECE7CCD002BFD56 = {
+		750939EF1ED2D4A100277C43 /* Combox */ = {
+			isa = PBXGroup;
+			children = (
+				75144E741ECEC049002BFD56 /* LHDropDownBox.h */,
+				75144E751ECEC049002BFD56 /* LHDropDownBox.m */,
+				75144E771ECEC064002BFD56 /* LHComBoBoxView.h */,
+				75144E781ECEC064002BFD56 /* LHComBoBoxView.m */,
+			);
+			name = Combox;
+			sourceTree = "<group>";
+		};
+		750939F01ED3BFA400277C43 /* SelectedPath */ = {
 			isa = PBXGroup;
 			children = (
 				75144E9D1ED01C39002BFD56 /* LHSelectedPath.h */,
 				75144E9E1ED01C39002BFD56 /* LHSelectedPath.m */,
+			);
+			name = SelectedPath;
+			sourceTree = "<group>";
+		};
+		750939F11ED3BFBE00277C43 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				75144E811ECEC887002BFD56 /* pulldown.png */,
+				75144E821ECEC887002BFD56 /* pullup.png */,
+				75144EA11ED27E34002BFD56 /* pull_up@2x.png */,
+				75144EA41ED27E86002BFD56 /* pull_down@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		750939F21ED3BFCC00277C43 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */,
+				75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */,
+				75144E7A1ECEC123002BFD56 /* UIColor+ComboBoxExtension.h */,
+				75144E7B1ECEC123002BFD56 /* UIColor+ComboBoxExtension.m */,
+				75144E7C1ECEC123002BFD56 /* UIView+ComboBoxExtension.h */,
+				75144E7D1ECEC123002BFD56 /* UIView+ComboBoxExtension.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		750939F31ED3BFED00277C43 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				75144E6C1ECE8229002BFD56 /* data.json */,
+			);
+			name = Json;
+			sourceTree = "<group>";
+		};
+		75144E241ECE7CCD002BFD56 = {
+			isa = PBXGroup;
+			children = (
 				75144E2F1ECE7CCD002BFD56 /* LHComboBox */,
 				75144E491ECE7CCD002BFD56 /* LHComboBoxTests */,
 				75144E541ECE7CCE002BFD56 /* LHComboBoxUITests */,
@@ -152,26 +206,18 @@
 		75144E2F1ECE7CCD002BFD56 /* LHComboBox */ = {
 			isa = PBXGroup;
 			children = (
+				750939F31ED3BFED00277C43 /* Json */,
+				750939F21ED3BFCC00277C43 /* Category */,
+				750939F11ED3BFBE00277C43 /* Images */,
+				750939F01ED3BFA400277C43 /* SelectedPath */,
+				750939EF1ED2D4A100277C43 /* Combox */,
 				75144E961ECEE46B002BFD56 /* Model */,
 				75144E951ECEDCBB002BFD56 /* Header */,
 				75144E851ECEC90E002BFD56 /* PopView */,
-				75144E811ECEC887002BFD56 /* pulldown.png */,
-				75144E821ECEC887002BFD56 /* pullup.png */,
-				75144E9A1ED0080D002BFD56 /* NSObject+Calculate.h */,
-				75144E9B1ED0080D002BFD56 /* NSObject+Calculate.m */,
-				75144E7A1ECEC123002BFD56 /* UIColor+ComboBoxExtension.h */,
-				75144E7B1ECEC123002BFD56 /* UIColor+ComboBoxExtension.m */,
-				75144E7C1ECEC123002BFD56 /* UIView+ComboBoxExtension.h */,
-				75144E7D1ECEC123002BFD56 /* UIView+ComboBoxExtension.m */,
-				75144E6C1ECE8229002BFD56 /* data.json */,
 				75144E331ECE7CCD002BFD56 /* AppDelegate.h */,
 				75144E341ECE7CCD002BFD56 /* AppDelegate.m */,
 				75144E361ECE7CCD002BFD56 /* ViewController.h */,
 				75144E371ECE7CCD002BFD56 /* ViewController.m */,
-				75144E741ECEC049002BFD56 /* LHDropDownBox.h */,
-				75144E751ECEC049002BFD56 /* LHDropDownBox.m */,
-				75144E771ECEC064002BFD56 /* LHComBoBoxView.h */,
-				75144E781ECEC064002BFD56 /* LHComBoBoxView.m */,
 				75144E391ECE7CCD002BFD56 /* Main.storyboard */,
 				75144E3C1ECE7CCD002BFD56 /* Assets.xcassets */,
 				75144E3E1ECE7CCD002BFD56 /* LaunchScreen.storyboard */,
@@ -358,8 +404,10 @@
 				75144E841ECEC887002BFD56 /* pullup.png in Resources */,
 				75144E6D1ECE8229002BFD56 /* data.json in Resources */,
 				75144E831ECEC887002BFD56 /* pulldown.png in Resources */,
+				75144EA51ED27E86002BFD56 /* pull_down@2x.png in Resources */,
 				75144E3D1ECE7CCD002BFD56 /* Assets.xcassets in Resources */,
 				75144E3B1ECE7CCD002BFD56 /* Main.storyboard in Resources */,
+				75144EA31ED27E34002BFD56 /* pull_up@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

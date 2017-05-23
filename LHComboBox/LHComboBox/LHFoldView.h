@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, LHFoldViewStatus) {  //面料大类的展开
 @property (nonatomic, strong) LHLayout *layout;
 @property (nonatomic, weak) id<LHFoldViewDelegate> delegate;
 @property (nonatomic, assign) LHFoldViewStatus foldViewStatus;
+
+- (instancetype)initWithFrame:(CGRect)frame tag:(NSUInteger)tag;
 @end
 
 @protocol LHFoldViewDelegate <NSObject>

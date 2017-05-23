@@ -8,7 +8,6 @@
 
 #import "LHTree.h"
 @interface LHTree ()
-//@property (nonatomic, strong) NSMutableArray *
 @end
 
 @implementation LHTree
@@ -86,8 +85,25 @@
 
 - (LHTreeNode *)rootNode {
     if (_rootNode == nil) {
-      _rootNode = [LHTreeNode  nodeWithTitle:@"筛选" isSelected:NO idNumber:@"0" parentIdNumber:nil];
+      _rootNode = [LHTreeNode  nodeWithTitle:@"筛选" isSelected:NO idNumber:@(0) parentIdNumber:nil];
     }
     return _rootNode;
+}
+
+//根据path来这颗树来找相应的节点，根据thirdPath是否为-1分辨出该path是选中的第三层还是第二层
+- (LHTreeNode *)findNodeWithPath:(LHSelectedPath *)path {
+    if (path.thirdPath == -1) {
+        return self.rootNode.childrenNodes[path.firstPath].childrenNodes[path.secondPath];
+    }
+    return self.rootNode.childrenNodes[path.firstPath].childrenNodes[path.secondPath].childrenNodes[path.thirdPath];
+}
+
+//根据path来这颗树来找相应的节点的父节点
+- (LHTreeNode *)findParentNodeWithPath:(LHSelectedPath *)path {
+    if (path.thirdPath == - 1) {
+        return self.rootNode.childrenNodes[path.firstPath];
+    }
+    return self.rootNode.childrenNodes[path.firstPath].childrenNodes[path.secondPath];
+
 }
 @end

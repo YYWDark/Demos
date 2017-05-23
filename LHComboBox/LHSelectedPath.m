@@ -7,7 +7,8 @@
 //
 
 #import "LHSelectedPath.h"
-
+@interface LHSelectedPath () <NSCopying>
+@end
 @implementation LHSelectedPath
 - (instancetype)init {
     self = [super init];
@@ -31,5 +32,9 @@
     path.secondPath = secondPath;
     path.thirdPath = thirdPath;
     return path;
+}
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    return  [[self class] pathWithFirstPath:self.firstPath secondPath:self.secondPath thirdPath:self.thirdPath];
 }
 @end
