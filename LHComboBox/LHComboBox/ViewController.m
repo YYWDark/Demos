@@ -7,17 +7,19 @@
 //
 
 #import "ViewController.h"
-#import "LHComBoBoxView.h"
-#import "LHSelectedPath.h"
+
 @interface ViewController () <LHComBoBoxViewDataSource, LHComBoBoxViewDelegate>
-@property (nonatomic, strong) LHTree *tree;
+
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) LHComBoBoxView *comBoBoxView;
 @end
 
 @implementation ViewController
 - (IBAction)action:(id)sender {
-  [self.navigationController pushViewController:[ViewController new] animated:YES];
+    ViewController *vc = [ViewController new];
+    vc.isForSecondPage = YES;
+    vc.tree = self.tree;
+   [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -35,8 +37,17 @@
     NSArray *result1 = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:nil];
    
     LHTree *tree1 = [[LHTree alloc] initWithDataArray:(NSArray *)result1];
+    if (self.isForSecondPage == NO){
+        self.tree = tree1;
+    }
     self.dataArray = @[tree, tree1];
     
+    
+    //第二个页面用上一个传过来的
+    if (self.isForSecondPage == YES) {
+        self.dataArray = @[self.tree]; 
+    }
+   
     /*
      说明：因为给的mobile_name的数据给过来是utf8样式，所以这里的显示我使用的事idNumber
      */

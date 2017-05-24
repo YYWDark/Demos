@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LHComBoBoxView.h"
+#import "LHSelectedPath.h"
 @interface ViewController : UIViewController
-
-
+@property (nonatomic, strong) LHTree *tree;
+@property (nonatomic, assign) BOOL isForSecondPage;
 @end
 
