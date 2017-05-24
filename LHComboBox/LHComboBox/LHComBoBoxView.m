@@ -54,7 +54,9 @@
 }
 
 - (void)dimissPopView {
-    
+    if (self.popupView.superview) {
+        [self.popupView dismissWithOutAnimation];
+    }
 }
 
 #pragma mark - Private Method

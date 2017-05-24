@@ -62,7 +62,7 @@
 
 //判断第一层的子树的深度
 - (void)calculateNumbersLayersOfTreeFirstNode {
-    
+    BOOL isZero = NO;
     for (LHTreeNode *firstNode in self.rootNode.childrenNodes) {
         LHTreeNode *currentNode = firstNode;
         NSUInteger numbersOflayers = 0;
@@ -72,15 +72,21 @@
         }
         [firstNode settingAboutnumbersOfLayers:numbersOflayers];
         NSLog(@"当前子视图的深度：%ld 节点名称:%@",firstNode.numbersOfLayers,firstNode.title);
+        if (firstNode.numbersOfLayers != 0) {
+            isZero = YES;
+        }
     }
     
+    //如果每层的深度为0则displayType = LHPopupViewDisplayTypeNormal
+    if (isZero == NO) {
+        self.displayType = LHPopupViewDisplayTypeNormal;
+    }
     
 }
 
 
 - (void)calculateEachNodeLayout:(LHTreeNode *)node {
     //单层的UI不需要用到layout类了
-    if (self.displayType == LHPopupViewDisplayTypeNormal) return;
     if (node == self.rootNode) return;
     if (node.childrenNodes.count == 0) return;
     [node calculateLayout];

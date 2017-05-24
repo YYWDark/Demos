@@ -51,7 +51,10 @@
 }
 
 - (void)dismissWithOutAnimation {
-  
+    if (self.superview) {
+        [self.shadowView removeFromSuperview];
+        [self removeFromSuperview];
+    }
 }
 
 - (void)popupViewFromSourceFrame:(CGRect)frame completion:(void (^)(void))completion {

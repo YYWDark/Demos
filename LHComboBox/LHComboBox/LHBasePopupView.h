@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGRect sourceFrame;                                       /* tapBar的frame**/
 @property (nonatomic, strong) LHTree *tree;
 @property (nonatomic, strong) UITableView *mainTableView;
+@property (nonatomic, strong) UIView *shadowView;
 @property (nonatomic, strong) NSMutableArray *temporaryArray;                            /* 暂存最初的状态**/
 @property (nonatomic, strong) NSMutableArray *selectedArray;                            /* 记录所选的item**/
 @property (nonatomic, weak) id<LHBasePopupViewDelegate> delegate;
@@ -22,6 +23,7 @@
 - (void)popupViewFromSourceFrame:(CGRect)frame completion:(void (^)(void))completion;
 + (LHBasePopupView *)getSubPopupViewWithTree:(LHTree *)tree;
 - (void)dismiss;
+- (void)dismissWithOutAnimation;
 @end
 
 @protocol LHBasePopupViewDelegate <NSObject>

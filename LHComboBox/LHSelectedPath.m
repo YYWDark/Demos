@@ -19,6 +19,10 @@
     return self;
 }
 
++ (instancetype)pathWithFirstPath:(NSInteger)firstPath {
+    return [self pathWithFirstPath:firstPath secondPath:-1];
+}
+
 + (instancetype)pathWithFirstPath:(NSInteger)firstPath
                        secondPath:(NSInteger)secondPath {
     return [self pathWithFirstPath:firstPath secondPath:secondPath thirdPath:-1];

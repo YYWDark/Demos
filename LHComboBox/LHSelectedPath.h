@@ -13,6 +13,7 @@
 @property (nonatomic, assign) NSInteger secondPath;         //default is -1. 全部的意思
 @property (nonatomic, assign) NSInteger thirdPath;          //default is -1. 全部的意思
 
++ (instancetype)pathWithFirstPath:(NSInteger)firstPath;
 
 + (instancetype)pathWithFirstPath:(NSInteger)firstPath
                        secondPath:(NSInteger)secondPath;

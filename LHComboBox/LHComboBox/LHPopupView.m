@@ -16,14 +16,6 @@
 @end
 
 @implementation LHPopupView
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-       
-    }
-    return self;
-}
-
 - (id)initWithTree:(LHTree *)tree {
     self = [self init];
     if (self) {
@@ -217,8 +209,7 @@
                 self.isSuccessfulToCallBack = NO;
             });
         }
-    }
-    
+    }    
     [self.mainTableView reloadData];
 }
 

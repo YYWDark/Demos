@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75093A861ED5145900277C43 /* data1.json in Resources */ = {isa = PBXBuildFile; fileRef = 75093A851ED5145900277C43 /* data1.json */; };
+		75093A8C1ED51BCD00277C43 /* MMNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75093A8B1ED51BCD00277C43 /* MMNormalCell.m */; };
+		75093A8E1ED51F0400277C43 /* list_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 75093A8D1ED51F0400277C43 /* list_selected@2x.png */; };
 		75144E321ECE7CCD002BFD56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E311ECE7CCD002BFD56 /* main.m */; };
 		75144E351ECE7CCD002BFD56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E341ECE7CCD002BFD56 /* AppDelegate.m */; };
 		75144E381ECE7CCD002BFD56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75144E371ECE7CCD002BFD56 /* ViewController.m */; };
@@ -54,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75093A851ED5145900277C43 /* data1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data1.json; sourceTree = "<group>"; };
+		75093A8A1ED51BCD00277C43 /* MMNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMNormalCell.h; sourceTree = "<group>"; };
+		75093A8B1ED51BCD00277C43 /* MMNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMNormalCell.m; sourceTree = "<group>"; };
+		75093A8D1ED51F0400277C43 /* list_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_selected@2x.png"; sourceTree = "<group>"; };
 		75144E2D1ECE7CCD002BFD56 /* LHComboBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LHComboBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75144E311ECE7CCD002BFD56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		75144E331ECE7CCD002BFD56 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 		750939F11ED3BFBE00277C43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				75093A8D1ED51F0400277C43 /* list_selected@2x.png */,
 				75144E811ECEC887002BFD56 /* pulldown.png */,
 				75144E821ECEC887002BFD56 /* pullup.png */,
 				75144EA11ED27E34002BFD56 /* pull_up@2x.png */,
@@ -178,6 +186,7 @@
 		750939F31ED3BFED00277C43 /* Json */ = {
 			isa = PBXGroup;
 			children = (
+				75093A851ED5145900277C43 /* data1.json */,
 				75144E6C1ECE8229002BFD56 /* data.json */,
 			);
 			name = Json;
@@ -256,6 +265,8 @@
 		75144E851ECEC90E002BFD56 /* PopView */ = {
 			isa = PBXGroup;
 			children = (
+				75093A8A1ED51BCD00277C43 /* MMNormalCell.h */,
+				75093A8B1ED51BCD00277C43 /* MMNormalCell.m */,
 				75144E861ECEC93D002BFD56 /* LHPopupView.h */,
 				75144E871ECEC93D002BFD56 /* LHPopupView.m */,
 				75144E891ECECC90002BFD56 /* LHBasePopupView.h */,
@@ -402,8 +413,10 @@
 			files = (
 				75144E401ECE7CCD002BFD56 /* LaunchScreen.storyboard in Resources */,
 				75144E841ECEC887002BFD56 /* pullup.png in Resources */,
+				75093A861ED5145900277C43 /* data1.json in Resources */,
 				75144E6D1ECE8229002BFD56 /* data.json in Resources */,
 				75144E831ECEC887002BFD56 /* pulldown.png in Resources */,
+				75093A8E1ED51F0400277C43 /* list_selected@2x.png in Resources */,
 				75144EA51ED27E86002BFD56 /* pull_down@2x.png in Resources */,
 				75144E3D1ECE7CCD002BFD56 /* Assets.xcassets in Resources */,
 				75144E3B1ECE7CCD002BFD56 /* Main.storyboard in Resources */,
@@ -447,6 +460,7 @@
 				75144E671ECE7F3C002BFD56 /* LHTreeNode.m in Sources */,
 				75144E7E1ECEC123002BFD56 /* UIColor+ComboBoxExtension.m in Sources */,
 				75144E351ECE7CCD002BFD56 /* AppDelegate.m in Sources */,
+				75093A8C1ED51BCD00277C43 /* MMNormalCell.m in Sources */,
 				75144E321ECE7CCD002BFD56 /* main.m in Sources */,
 				75144E791ECEC064002BFD56 /* LHComBoBoxView.m in Sources */,
 			);
