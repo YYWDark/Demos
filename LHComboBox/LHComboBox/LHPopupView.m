@@ -239,7 +239,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    LHTreeNode *node = self.tree.rootNode.childrenNodes[indexPath.section];
     CGFloat heigth = [node getCellHeight];
-    NSLog(@"heigth == %lf",heigth);
+//    NSLog(@"heigth == %lf",heigth);
     return heigth;
 }
 

@@ -87,8 +87,25 @@
                 
                 if (subArray.count == 0) {//说明没有选中
                     LHTreeNode *firstNode = tree.rootNode.childrenNodes[i];
-                    NSLog(@"当前的parent ==%@  children 没有选中项",[NSString stringWithFormat:@" %ld",[firstNode.idNumber integerValue]]);
-                }else {
+                    switch (firstNode.numbersOfLayers) {
+                        case 1:
+                            NSLog(@"当前的parent ==%@  children 没有选中项",[NSString stringWithFormat:@" %ld",[firstNode.idNumber integerValue]]);
+                            break;
+                        case 2:{
+                            BOOL isSelected = NO;
+                            for (LHTreeNode *secondNode in firstNode.childrenNodes) {
+                                if (secondNode.isSelected == YES) {
+                                NSLog(@"当前的parent == %@ 二级选中项 == %@",[NSString stringWithFormat:@" %ld",[firstNode.idNumber integerValue]],[NSString stringWithFormat:@" %ld",[secondNode.idNumber integerValue]]);
+                                    isSelected = YES;
+                                }
+                            }
+                            if (isSelected == NO) {
+                                NSLog(@"当前的parent ==%@  children 没有选中项",[NSString stringWithFormat:@" %ld",[firstNode.idNumber integerValue]]);
+
+                            }
+                            break;}
+                    }
+                }else{
                     NSLog(@"当前的parent == %@ children == %@",parentTitle,subTitle);
                 }
             }
