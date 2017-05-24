@@ -11,7 +11,6 @@
 static const CGFloat horizontalMargin = 10.0f;
 @interface MMNormalCell ()
 @property (nonatomic, strong) UILabel *title;
-@property (nonatomic, strong) UILabel *subTitle;
 @property (nonatomic, strong) UIImageView *selectedImageview;
 @property (nonatomic, strong) CALayer *bottomLine;
 @end
@@ -28,11 +27,8 @@ static const CGFloat horizontalMargin = 10.0f;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.selectedImageview.frame = CGRectMake(horizontalMargin, (self.height -16)/2, 16, 16);
-    self.title.frame = CGRectMake(self.selectedImageview.right + 20, 0, 100, self.height);
-//    if (_node.subTitle != nil) {
-//        self.subTitle.frame = CGRectMake(self.width - horizontalMargin - 100 , 0, 100, self.height);
-//    }
+    self.selectedImageview.frame = CGRectMake(kScreenWidth - horizontalMargin - 16 , (self.height -16)/2, 16, 16);
+    self.title.frame = CGRectMake(horizontalMargin, 0, self.selectedImageview.left - horizontalMargin, self.height);
     self.bottomLine.frame = CGRectMake(0, self.height - 1.0/scale , self.width, 1.0/scale);
 }
 
@@ -55,17 +51,6 @@ static const CGFloat horizontalMargin = 10.0f;
         [self addSubview:_title];
     }
     return _title;
-}
-
-- (UILabel *)subTitle {
-    if (!_subTitle) {
-        _subTitle = [[UILabel alloc] init];
-        _subTitle.textColor = [UIColor blackColor];
-        _subTitle.textAlignment = NSTextAlignmentRight;
-        _subTitle.font = [UIFont systemFontOfSize:SubTitleFontSize];
-        [self addSubview:_subTitle];
-    }
-    return _subTitle;
 }
 
 - (UIImageView *)selectedImageview {

@@ -48,6 +48,7 @@
     self.mainTableView.rowHeight = PopupViewRowHeight;
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.mainTableView registerClass:[MMNormalCell class] forCellReuseIdentifier:MainCellID];
     [self addSubview:self.mainTableView];
     
