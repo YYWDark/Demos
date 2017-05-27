@@ -55,9 +55,27 @@
     
     [self calculateNumbersLayersOfTreeFirstNode];
     
+    [self insertNodeFront:845];
+    
     if (mutableArray.count != 0) {
         NSLog(@"构建树的出现了问题 有的节点没有找到父节点");
     }
+    
+    /*遍历这棵树的first节点，判断是否相等，相等拿到当前的index,记录下来。等到遍历完 再把这个index的节点插入到最前面*/
+}
+
+- (void)insertNodeFront:(NSInteger)nodeId {
+    if (self.rootNode.childrenNodes.count == 0) return;
+    NSUInteger replaceIndex = 0;
+    for (int index = 0; index < self.rootNode.childrenNodes.count; index ++) {
+        LHTreeNode *node = self.rootNode.childrenNodes[index];
+        if ([node.idNumber integerValue] == nodeId) {
+            replaceIndex = index;
+            break;
+        }
+    }
+    
+    [self.rootNode.childrenNodes exchangeObjectAtIndex:0 withObjectAtIndex:replaceIndex];
 }
 
 //判断第一层的子树的深度
@@ -82,6 +100,10 @@
         self.displayType = LHPopupViewDisplayTypeNormal;
     }
     
+    //应该在下面去遍历
+    if (self.displayType == LHPopupViewDisplayTypeNormal) {
+        //去子节点看有没有选中的  没有设置第一个为选中的
+    }
 }
 
 
