@@ -4,6 +4,7 @@ import UIKit
 
 var str = "Hello, playground"
 
+//数组
 var someInts = [Int]()
 print("some is of type [Int] with \(someInts.count) items")
 
@@ -23,7 +24,6 @@ if shoplist.isEmpty == false {
 
 shoplist.append("kobe")
 
-//访问
 let name = shoplist[0]
 shoplist[0] = "wangyayun"
 print(shoplist)
@@ -44,6 +44,53 @@ for (index, value) in shoplist.enumerated() {
     print("\(index) \(value)")
 }
 
+var array = [3,4,5]
+var copyArray = array
+type(of:array)
+
+func getBufferAddress<T>(array:[T]) -> String{
+    return array.withUnsafeBufferPointer {
+        return String(describing:$0)
+    }
+}
+
+getBufferAddress(array: array)
+getBufferAddress(array: copyArray)
+array .append(6)
+getBufferAddress(array: array)
+getBufferAddress(array: copyArray)
+
+array.forEach {
+    print($0)
+}
+
+let index = array.index{$0 == 3}
+let fabonacci = [0, 1, 1, 2, 3, 5]
+var squre = [Int]()
+
+for value in fabonacci {
+    squre.append(value * value)
+}
+
+print(squre)
+
+let constSqure = fabonacci.map {$0*$0}
+print(constSqure)
+
+//extension Array {
+//    func myMap<T>(_ transform : (Element) -> T) -> T {
+//        var tem = [Int]()
+//        tem.reserveCapacity(count)
+//        for value in self {
+//           tem.append(transform(value) as! Int)
+//        }
+//        return tem as! T
+//    }
+//}
+
+//fabonacci.myMap {
+//    print($0)
+//}
 //集合
 //集合类型的哈希值 一个类型为了存储在集合中，该类型必须是可哈希化的--也就是说，该类型必须提供一个方法来计算它的哈希 值。一个哈希值是 Int 类型的，相等的对象哈希值必须相同，比如 a==b ,因此必须 a.hashValue == b.hashValue。
 
@@ -51,7 +98,6 @@ var letters = Set<Character>()
 print("letters is of type Set<Character> with \(letters.count) items.")
 letters.insert("a")
 print(letters)
-
 letters = []
 
 var favoriteGenres:Set<String> = ["wyy","bobo","chenda"]

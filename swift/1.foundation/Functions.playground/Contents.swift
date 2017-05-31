@@ -90,6 +90,7 @@ func mutableParameters(numbers:Double...) -> Double{
 mutableParameters(numbers: 1.0,1.2,1.3)
 
 //在参数定义前加 inout 关键字。一个输入输出参数有传入函数的值，这个值被函数 修改，然后被传出函数，替换原来的值
+//Swift是安全的语言，不允许两个不同类型互换值
 func swapTwoValues(a:inout Int,b:inout Int) {
     let temA = b
     b = a
@@ -101,7 +102,35 @@ var b = 4
 
 swapTwoValues(a: &a, b: &b)
 print("\(a) \(b)")
+print(a,b)
 
+//泛型
+//这个函数主体、功能跟上面的例子类似，用来交换两个同样类型的值，但是这个函数用 T 占位符来代替实际的类型。并没有指定具体的类型 但是传入的a ,b 必须是同一类型T
+func swapTwoValueByGenericity<T>(a:inout T, b:inout T) -> Void {
+    let tem = a
+    a = b
+    b = tem
+}
+
+var doubleA = 3.0
+var doubleB = 4.0
+swapTwoValueByGenericity(a: &doubleA, b: &doubleB)
+print("\(doubleA) \(doubleB)")
+//这个例子用泛型完美的解决了上述的问题，只需要定义一个泛型函数，只要保证 传入的两个参数是同一个类型，就不用根据传入参数的类型不同而写不同的方法。
+
+var stringA = "A"
+var stringB = "B"
+swapTwoValueByGenericity(a: &stringA, b: &stringB)
+print("\(stringA) \(stringB)")
+
+
+
+
+func mul (_ m:Int, _ n:Int) -> Int {
+    return m * n
+}
+
+mul(3,4)
 
 
 
