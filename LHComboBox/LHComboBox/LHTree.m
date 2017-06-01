@@ -7,6 +7,7 @@
 //
 
 #import "LHTree.h"
+const static NSInteger SelectedID = 223;
 @interface LHTree ()
 @end
 
@@ -37,6 +38,11 @@
         NSMutableArray *temArray = [NSMutableArray array]; //储存将要删除额index
         for (NSInteger index = (mutableArray.count - 1); index >= 0; index --) {
             LHTreeNode *node = mutableArray[index];
+          
+            if ([node.idNumber integerValue] == 223 || [node.idNumber integerValue] == 854) {
+                node.isSelected = YES;
+            }
+            
             if ([firstNode.idNumber integerValue] == [node.parentIdNumber integerValue]) {
                 [queue addObject:node];
                 [firstNode addNode:node];

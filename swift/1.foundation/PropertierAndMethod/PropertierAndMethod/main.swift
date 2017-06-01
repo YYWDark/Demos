@@ -136,6 +136,8 @@ print("this spped is \(veh.currentSpeed) time is \(veh.hour)")
 let cheeseQuestion = Construction(text: "Do you like cheese?")
 cheeseQuestion.ask()
 cheeseQuestion.response = "Yes, I do like cheese."
+
+
 //你可以在构造过程中的任意时间点给常量属性指定一个值，只要在构造过程结束时是一个确定的值。一旦常量属性被赋值，它将永远不可更改。
 
 

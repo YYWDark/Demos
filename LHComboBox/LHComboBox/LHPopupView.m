@@ -44,6 +44,7 @@
                         break;}
                     case 2:{//二级的为单选，因为还有三级
                         firstNode.firstOpenStatus = LHTreeNodeFirstClose;
+                        firstNode.secondOpenStatus = LHTreeNodeSecondClose;
                         if (secondNode.isSelected == YES) {//第二层选中，然后遍历第三层的
                             for (int thirdIndex = 0; thirdIndex <secondNode.childrenNodes.count; thirdIndex++) {
                                 LHTreeNode *thirdNode = secondNode.childrenNodes[thirdIndex];

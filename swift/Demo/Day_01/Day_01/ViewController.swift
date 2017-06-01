@@ -20,10 +20,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         //数据源
         dataArrays = [
-            Product.init(name: "1907 Wall Set", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
-            Product.init(name: "1907 Wall Set", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
-            Product.init(name: "1907 Wall Set", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
-            Product.init(name: "1907 Wall Set", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
+            Product.init(name: "1907 Wall Set 1", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
+            Product.init(name: "1907 Wall Set 2", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
+            Product.init(name: "1907 Wall Set 3", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
+            Product.init(name: "1907 Wall Set 4", cellImageName: "image-cell1", fullScreenImageName: "phone-fullscreen1"),
         ]
         
        //视图
@@ -40,11 +40,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ProductCell
         let product = dataArrays?[indexPath.row]
-        cell.textLabel?.text = product?.name
-        cell.imageView?.image = UIImage.init(named: (product?.cellImageName)!)
-
+        cell .setProduct(product: product!)
         return cell;
     }
 
